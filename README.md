@@ -135,26 +135,6 @@ The automated demo (Option 1) runs these 6 queries:
 → Ensure Docker Desktop is running  
 → Try: `docker-compose build --no-cache`
 
-## 📹 Video Demonstration
-
-**Link**: [Add your video link here after recording]
-
-**Recording Instructions**:
-
-1. Run `docker-compose up agent` (automated demo)
-2. Follow VIDEO_SCRIPT_3MIN.txt
-3. Shows all 9 operations in 3 minutes
-4. Upload to YouTube/Google Drive
-
-## 📦 What to Submit
-
-- [ ] All code files (servers/, tests/, agent_demo.py)
-- [ ] README.md (this file)
-- [ ] summary.md (MCP explanation)
-- [ ] reflection.md (lessons learned)
-- [ ] requirements.txt, Dockerfile, docker-compose.yml
-- [ ] Video demonstration link (3-5 minutes)
-
 ## 🛠️ Technologies
 
 - **Python 3.11**: Async/await, aiohttp
@@ -163,17 +143,6 @@ The automated demo (Option 1) runs these 6 queries:
 - **pytest**: Unit testing with pytest-asyncio
 - **APIs**: OpenStreetMap Nominatim (geocoding), Open-Meteo (weather)
 
-## ✅ Assignment Checklist
-
-✅ 3 map servers (geocoding, routing, weather)  
-✅ 9 operations total (3 per server)  
-✅ MCP-compliant tool definitions  
-✅ OpenAI agent with function calling  
-✅ 26 unit tests  
-✅ Docker containerization  
-✅ README + summary + reflection  
-⏳ Video demonstration
-
 ---
 
-**Need Help?** Check summary.md for MCP concepts or reflection.md for common issues encountered during development.
+**For More Information**: See `summary.md` for MCP concepts and `reflection.md` for lessons learned during development.
