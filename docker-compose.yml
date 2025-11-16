@@ -1,0 +1,87 @@
+version: "3.8"
+
+services:
+  # Main agent service
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hw5-map-agent
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount source code for development
+      - ./servers:/app/servers
+      - ./tests:/app/tests
+      - ./examples:/app/examples
+      - ./agent_demo.py:/app/agent_demo.py
+    networks:
+      - map-network
+    stdin_open: true
+    tty: true
+    command: python agent_demo.py
+    restart: unless-stopped
+
+  # Interactive demo service (no API key needed)
+  demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hw5-interactive-demo
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./servers:/app/servers
+      - ./examples:/app/examples
+    networks:
+      - map-network
+    stdin_open: true
+    tty: true
+    command: python examples/interactive_demo.py
+    profiles:
+      - demo
+    restart: unless-stopped
+
+  # Test runner service
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hw5-tests
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./servers:/app/servers
+      - ./tests:/app/tests
+    networks:
+      - map-network
+    command: pytest tests/ -v --tb=short
+    profiles:
+      - test
+    restart: "no"
+
+  # Development service with shell access
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hw5-dev
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app
+    networks:
+      - map-network
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    profiles:
+      - dev
+    restart: unless-stopped
+
+networks:
+  map-network:
+    driver: bridge
+    name: hw5-map-network
